@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AutoCut</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">Auto<span>Cut</span></div>
+  <div class="sub">Cleans talking-head footage on V1</div>
+</header>
+
+<section class="actions">
+  <button id="btnBuild" class="primary">Analyze &amp; build cut sequence</button>
+  <div class="row2">
+    <button id="btnPreview">Preview as markers</button>
+    <button id="btnClear">Clear markers</button>
+  </div>
+</section>
+
+<section id="status" class="status hidden">
+  <div class="bar"><div id="barFill"></div></div>
+  <div id="statusText">Idle</div>
+</section>
+
+<section id="summary" class="summary hidden"></section>
+
+<details id="trBox" class="hidden">
+  <summary>Transcript <span class="dim">(click a line to jump there)</span></summary>
+  <div class="legend"><span class="k">kept</span><span class="c">cut</span><span class="r">check</span></div>
+  <div id="transcript" dir="auto"></div>
+</details>
+
+<details open>
+  <summary>Script <span class="dim">(optional, makes it smarter)</span></summary>
+  <textarea id="script" dir="auto" rows="5" placeholder="الصق السكريبت هنا… (paste your script here; changed words are OK)"></textarea>
+  <div class="row2">
+    <button id="btnLoadScript" class="small">Load .txt</button>
+    <button id="btnClearScript" class="small">Clear</button>
+    <input type="file" id="scriptFile" accept=".txt,.md" class="hidden">
+  </div>
+  <label class="field">Parts not in the script
+    <select id="off_script_mode">
+      <option value="mark">Mark for review (I sometimes improvise)</option>
+      <option value="cut">Cut short ones (long parts are only marked)</option>
+      <option value="off">Ignore</option>
+    </select>
+  </label>
+</details>
+
+<details open>
+  <summary>What to remove</summary>
+  <label class="chk"><input type="checkbox" id="cut_gaps" checked> Gaps / silences</label>
+  <label class="chk"><input type="checkbox" id="trim_ends" checked> Trim before first &amp; after last word</label>
+  <label class="chk"><input type="checkbox" id="cut_retakes" checked> Retakes (keep the last take)</label>
+  <label class="chk"><input type="checkbox" id="cut_stutters" checked> Quick repeats ("انا النهارده انا النهارده")</label>
+  <label class="chk"><input type="checkbox" id="cut_fillers" checked> Fillers (امم / اااه / افف)</label>
+  <label class="chk"><input type="checkbox" id="cut_mistakes" checked> Mistake talk ("انا نسيت الكلام", "خليني اعيد"…)</label>
+  <label class="field">Reading the script
+    <select id="reading_mode">
+      <option value="auto">Auto: cut when looking away + flat voice, mark the rest</option>
+      <option value="cut">Cut whenever I look away</option>
+      <option value="mark">Only mark for review</option>
+      <option value="off">Off</option>
+    </select>
+  </label>
+  <label class="field">Sounds without speech (cough, bump…)
+    <select id="noise_mode">
+      <option value="mark">Mark for review</option>
+      <option value="cut">Cut</option>
+      <option value="off">Ignore</option>
+    </select>
+  </label>
+</details>
+
+<details>
+  <summary>Tuning</summary>
+  <label class="field">Minimum gap to cut <b id="v_min_gap"></b>
+    <input type="range" id="min_gap" min="0.2" max="2" step="0.05" value="0.5"></label>
+  <label class="field">Breathing room kept at cuts <b id="v_pad"></b>
+    <input type="range" id="pad" min="0" max="0.4" step="0.01" value="0.12"></label>
+  <label class="field">Retake similarity <b id="v_retake_similarity"></b>
+    <input type="range" id="retake_similarity" min="60" max="95" step="1" value="80"></label>
+  <label class="field">Gaze sensitivity (lower = stricter) <b id="v_gaze_z"></b>
+    <input type="range" id="gaze_z" min="2.5" max="7" step="0.25" value="4"></label>
+  <label class="field">Silence threshold above noise floor (dB) <b id="v_silence_margin_db"></b>
+    <input type="range" id="silence_margin_db" min="4" max="20" step="1" value="10"></label>
+</details>
+
+<details>
+  <summary>Advanced</summary>
+  <label class="field">Whisper model
+    <select id="model">
+      <option value="large-v3">large-v3 (best Arabic, ~3 GB VRAM)</option>
+      <option value="large-v3-turbo">large-v3-turbo (faster)</option>
+      <option value="medium">medium (low VRAM)</option>
+    </select>
+  </label>
+  <label class="field">Language
+    <select id="language">
+      <option value="ar">Arabic</option>
+      <option value="en">English</option>
+      <option value="">Auto-detect</option>
+    </select>
+  </label>
+  <label class="field">Python path (leave empty = bundled engine)
+    <input type="text" id="python_path" placeholder="auto"></label>
+  <button id="btnReset" class="small">Reset settings</button>
+</details>
+
+<details id="logBox">
+  <summary>Log</summary>
+  <pre id="log"></pre>
+</details>
+
+<script src="js/main.js"></script>
+</body>
+</html>

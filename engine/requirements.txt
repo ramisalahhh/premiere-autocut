@@ -1,0 +1,8 @@
+faster-whisper>=1.1.0
+nvidia-cublas-cu12
+nvidia-cudnn-cu12==9.*
+numpy
+av>=11
+rapidfuzz>=3.0
+librosa>=0.10
+mediapipe>=0.10.20

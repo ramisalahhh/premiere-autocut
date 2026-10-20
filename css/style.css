@@ -1,0 +1,64 @@
+:root {
+  --bg: #232323; --panel: #2c2c2c; --line: #3a3a3a; --text: #d6d6d6; --dim: #8c8c8c;
+  --accent: #2d8ceb; --accent2: #49a0f5; --good: #3fbf7f; --warn: #e5a93b; --bad: #e5534b;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text);
+  font: 12px/1.45 "Segoe UI", system-ui, sans-serif; }
+body { padding: 12px; }
+header { margin-bottom: 12px; }
+.brand { font-size: 18px; font-weight: 700; letter-spacing: .3px; }
+.brand span { color: var(--accent2); }
+.sub { color: var(--dim); font-size: 11px; }
+
+button { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px;
+  background: var(--panel); color: var(--text); font: inherit; cursor: pointer; }
+button:hover:not(:disabled) { border-color: #555; background: #333; }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; padding: 10px; }
+button.primary:hover:not(:disabled) { background: var(--accent2); }
+button.small { width: auto; padding: 4px 10px; margin-top: 6px; }
+.row2 { display: flex; gap: 6px; margin-top: 6px; }
+
+.status { margin: 12px 0 6px; }
+.bar { height: 6px; background: var(--panel); border-radius: 3px; overflow: hidden; }
+#barFill { height: 100%; width: 0; background: var(--accent); transition: width .25s; }
+#statusText { color: var(--dim); margin-top: 5px; min-height: 16px; }
+.hidden { display: none; }
+
+.summary { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 10px; margin: 8px 0; }
+.summary .big { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.summary .big b { color: var(--good); }
+.summary table { width: 100%; border-collapse: collapse; }
+.summary td { padding: 2px 0; }
+.summary td:last-child { text-align: right; color: var(--dim); font-variant-numeric: tabular-nums; }
+.summary .note { color: var(--warn); margin-top: 6px; }
+.summary .error { color: var(--bad); }
+
+details { border-top: 1px solid var(--line); padding: 8px 0; }
+summary { cursor: pointer; font-weight: 600; color: #e8e8e8; outline: none; }
+details[open] summary { margin-bottom: 8px; }
+.chk { display: flex; align-items: center; gap: 7px; padding: 3px 0; cursor: pointer; }
+.field { display: block; margin: 8px 0; color: var(--dim); }
+.field b { color: var(--text); font-weight: 600; float: right; }
+select, input[type=text] { width: 100%; margin-top: 4px; padding: 5px 6px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 3px; color: var(--text); font: inherit; }
+input[type=range] { width: 100%; margin-top: 4px; accent-color: var(--accent); }
+input[type=checkbox] { accent-color: var(--accent); }
+.dim { color: var(--dim); font-weight: 400; font-size: 11px; }
+textarea { width: 100%; padding: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 3px;
+  color: var(--text); font: 13px/1.5 "Segoe UI", Tahoma, sans-serif; resize: vertical; }
+.row2 .small { flex: 1; }
+.legend { display: flex; gap: 10px; font-size: 11px; margin-bottom: 6px; }
+.legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; }
+.legend .k::before { background: var(--good); } .legend .c::before { background: var(--bad); } .legend .r::before { background: var(--warn); }
+#transcript { max-height: 320px; overflow: auto; background: #1b1b1b; border-radius: 3px; padding: 4px; }
+.ph { display: flex; gap: 8px; padding: 4px 6px; border-left: 3px solid var(--good); margin: 2px 0; cursor: pointer; border-radius: 2px; }
+.ph:hover { background: #2a2a2a; }
+.ph .tm { color: var(--dim); font: 11px Consolas, monospace; flex: 0 0 auto; direction: ltr; padding-top: 2px; }
+.ph .tx { flex: 1; font-size: 13px; }
+.ph .tag { font-size: 10px; color: var(--dim); flex: 0 0 auto; padding-top: 3px; direction: ltr; }
+.ph.cut { border-left-color: var(--bad); } .ph.cut .tx { color: #8a6d6b; text-decoration: line-through; }
+.ph.check { border-left-color: var(--warn); }
+pre#log { max-height: 220px; overflow: auto; background: #1b1b1b; padding: 8px; border-radius: 3px;
+  white-space: pre-wrap; word-break: break-word; font: 11px/1.4 Consolas, monospace; color: #aaa; margin: 0; }

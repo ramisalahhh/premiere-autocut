@@ -1,0 +1,17 @@
+# premiere-autocut
+
+> Adobe Premiere Pro 2022+ CEP panel + local Python engine (faster-whisper, MediaPipe, rapidfuzz) that auto-cuts silences, retakes (keeps the last take), mistake talk, fillers and script-reading moments from talking-head videos. Egyptian Arabic first, English supported. Non-destructive: builds a new sequence from subclips.
+
+## Docs
+- [README](README.md): features, install, usage
+- [AGENTS.md](AGENTS.md): repo map, commands, data contracts, gotchas (read this before changing code)
+- [Architecture](docs/ARCHITECTURE.md): pipeline and design decisions
+- [Tuning](docs/TUNING.md): settings vs. symptoms
+
+## Code
+- [engine/analyze.py](engine/analyze.py): CLI entry point and defaults
+- [engine/detectors.py](engine/detectors.py): detection primitives
+- [engine/script_align.py](engine/script_align.py): script alignment
+- [engine/plan.py](engine/plan.py): cut planning
+- [jsx/host.jsx](jsx/host.jsx): Premiere ExtendScript (ES3)
+- [js/main.js](js/main.js): panel logic

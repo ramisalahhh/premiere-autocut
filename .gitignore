@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+engine/.venv/
+.venv/
+
+# Runtime data created on the user's machine
+engine/cache/
+engine/models/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.zip

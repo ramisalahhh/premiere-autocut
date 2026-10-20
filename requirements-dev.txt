@@ -1,0 +1,7 @@
+# Lightweight deps for running the tests (no GPU / Whisper / MediaPipe needed)
+numpy
+rapidfuzz>=3.0
+librosa>=0.10
+av>=11
+pytest>=8
+ruff>=0.6

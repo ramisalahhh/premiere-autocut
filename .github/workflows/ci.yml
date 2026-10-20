@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  engine:
+    name: Engine tests (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          allow-prereleases: true
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check engine tests
+      - run: pytest -q
+
+  panel:
+    name: Panel syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check panel JS
+        run: node --check js/main.js
+      - name: Check ExtendScript (ES3) parses
+        run: node -e "new Function(require('fs').readFileSync('jsx/host.jsx','utf8'))"
+      - name: Validate manifest
+        run: python3 -c "import xml.dom.minidom as m; m.parse('CSXS/manifest.xml'); m.parse('.debug')"

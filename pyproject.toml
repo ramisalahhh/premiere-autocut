@@ -1,0 +1,19 @@
+[project]
+name = "premiere-autocut"
+version = "1.2.0"
+description = "Premiere Pro panel that auto-cuts silences, retakes, mistakes and script-reading from talking-head videos (Egyptian Arabic + English)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Rami Mohamed Salah" }]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B"]
+ignore = ["E501", "B007", "B023"]
